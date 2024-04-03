@@ -1,0 +1,45 @@
+.data-grid {
+  --border-color: #e5e7eb;
+  --ag-border-color: #e5e7eb;
+  --ag-cell-horizontal-padding: 8px;
+  .ag-root-wrapper {
+    border-radius: 4px;
+  }
+  &.ag-theme-alpine {
+    --ag-cell-horizontal-border: var(--ag-border-color);
+    .ag-header-cell {
+      border-right: 1px solid var(--ag-cell-horizontal-border);
+      background-color: #C7F7F7 !important;
+      color: #003333 !important;
+      .ag-header-cell-label {
+        display: flex;
+        justify-content: center;
+        .ag-header-cell-text {
+          display: flex;
+          justify-content: center;
+          text-align: center;
+          flex-wrap: wrap;
+          white-space: normal;
+        }
+      }
+    }
+    .ag-cell {
+      border-right: 1px solid var(--ag-cell-horizontal-border);
+      display: flex;
+      align-items: center;
+      &.qr-cell {
+        color: #0B7070;
+        cursor: pointer;
+        text-decoration: dashed;
+      }
+      &.al-center {
+        text-align: center;
+        justify-content: center;
+      }
+      &.al-right {
+        text-align: right;
+        justify-content: end;
+      }
+    }
+  }
+}

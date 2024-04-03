@@ -1,0 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+html {
+  overflow: hidden;
+  // font-size: 62.5%; // for rem, 1rem = 10px
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    // background-color: var(--icon-disabled);
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #94a3b8;
+    border-radius: 10px;
+    background-clip: padding-box;
+  }
+}
+
+html,
+body,
+#root,
+.app {
+  height: 100%;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body {
+  font-size: 1.4rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-weight: inherit;
+  font-size: inherit;
+  font-family: inherit;
+}
+
+._loading_overlay_overlay {
+  background-color: rgb(137, 137, 137);
+  opacity: 0.7;
+}
+
+:root {
+  --primary-color: #20BDBD;
+}
+
+.Toastify {
+  .Toastify__toast-body {
+    > div {
+      font-size: 1rem;
+    }
+  }
+}

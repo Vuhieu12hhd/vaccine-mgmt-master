@@ -1,0 +1,10 @@
+.data-grid {
+  .ag-cell {
+    overflow: visible !important;
+  }
+
+  .ag-row-focus {
+    overflow: visible !important;
+    z-index: 1000;
+  }
+}

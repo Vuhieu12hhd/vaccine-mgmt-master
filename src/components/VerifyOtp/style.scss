@@ -1,0 +1,9 @@
+.otp-input {
+  width: 2.5rem !important;
+  border: 1.5px solid;
+  outline: none;
+  border-radius: 4px;
+  &:focus {
+    border: 1.5px solid #007EA6;
+  }
+}

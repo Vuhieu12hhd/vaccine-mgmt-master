@@ -1,0 +1,32 @@
+.vaccine-picker {
+  min-width: 200px;
+  max-height: 36px;
+  .css-t3ipsp-control,
+  .css-13cymwt-control {
+    min-height: 36px;
+    height: 36px;
+    font-size: 12px;
+    box-shadow: none;
+    .css-1u9des2-indicatorSeparator {
+      display: none;
+    }
+    .css-319lph-ValueContainer {
+      height: 100%;
+      padding: 0 5px;
+    }
+
+    .css-1hb7zxy-IndicatorsContainer {
+      height: 100%;
+      .css-tlfecz-indicatorContainer {
+        padding: 0 5px;
+      }
+    }
+  }
+
+  .css-1nmdiq5-menu {
+    max-height: 200px;
+    > div {
+      max-height: 200px;
+    }
+  }
+}
