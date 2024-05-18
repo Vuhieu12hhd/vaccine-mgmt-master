@@ -25,7 +25,7 @@ export const mapRole: Record<string, string> = {
   [ROLE.ADMIN]: 'Admin',
   [ROLE.DOCTOR]: 'Bác sỹ',
   [ROLE.CUSTOMER]: 'Khách hàng',
-  [ROLE.WAREHOUSE_MANAGER]: 'Quản kho',
+  [ROLE.WAREHOUSE_MANAGER]: 'Nhân viên',
 };
 
 

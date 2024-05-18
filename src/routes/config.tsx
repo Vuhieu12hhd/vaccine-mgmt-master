@@ -81,7 +81,7 @@ export const HomeNav = [
   {
     path: ROUTES.SCHEDULE_HISTORY,
     element: <ScheduleHistory />,
-    label: 'LỊCH SỬ',
+    label: 'TIÊM CHỦNG',
     roles: [ROLE.DOCTOR, ROLE.ADMIN, ROLE.WAREHOUSE_MANAGER],
     loader,
   },
@@ -89,7 +89,7 @@ export const HomeNav = [
     path: ROUTES.CUSTOMER_MANAGEMENT,
     element: <UserManagement key={ROUTES.CUSTOMER_MANAGEMENT} title="Khách Hàng" type="CUSTOMER" />,
     label: 'KHÁCH HÀNG',
-    roles: [ROLE.ADMIN, ROLE.DOCTOR],
+    roles: [ROLE.ADMIN, ROLE.DOCTOR,ROLE.WAREHOUSE_MANAGER],
     loader,
   },
   {
@@ -102,7 +102,7 @@ export const HomeNav = [
   {
     path: ROUTES.VACCINE_MANAGEMENT,
     element: <VaccineList />,
-    label: 'DANH MỤC VACCINE',
+    label: 'THÔNG TIN VACCINE',
     roles: [ROLE.ADMIN, ROLE.CUSTOMER, ROLE.DOCTOR, ROLE.WAREHOUSE_MANAGER],
     loader,
   },

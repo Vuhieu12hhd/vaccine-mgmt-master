@@ -56,8 +56,8 @@ const Register = () => {
           <Loader active={loading} className="md:w-8/12 lg:ml-6 lg:w-5/12">
             <Formik initialValues={{ email: '', password: '', address: '', name: '', phoneNumber: '' }} onSubmit={onSubmit} validationSchema={schema}>
               {({ values, handleChange, handleBlur, handleSubmit, touched, errors }) => (
-                <form className="bg-[#D1E9E5] rounded-md p-[2rem]" onSubmit={handleSubmit}>
-                  <div className="text-5xl font-medium leading-tight text-center mb-[5rem] mt-[5rem]">Đăng ký</div>
+                <form className="bg-[#D6E3F3] rounded-md p-[2rem]" onSubmit={handleSubmit}>
+                  <div className="text-5xl font-medium leading-tight text-center mb-[5rem] mt-[5rem]">ĐĂNG KÝ</div>
                   <div className="grid gap-5 grid-cols-1 md:grid-cols-2 mb-10">
                     <TextInput
                       type="text"

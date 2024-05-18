@@ -50,7 +50,7 @@ const CreateSchedule = () => {
       field: 'injectorInfo.dob',
       valueFormatter: dateFormatterFromTimestamp,
       cellClass: 'al-center',
-      minWidth: 110,
+      maxWidth: 100,
       colId: 'dob',
     },
     {
@@ -67,7 +67,7 @@ const CreateSchedule = () => {
     {
       headerName: 'Cơ sở tiêm',
       field: 'address',
-      maxWidth: 100,
+      maxWidth: 130,
       colId: 'address',
     },
     {
@@ -76,7 +76,7 @@ const CreateSchedule = () => {
       valueFormatter: dateTimeFormatterFromTimestamp,
       colId: 'date',
       cellClass: 'al-center',
-      minWidth: 150,
+      minWidth: 200,
     },
     {
       headerName: 'Loại vaccine',
@@ -143,20 +143,20 @@ const CreateSchedule = () => {
           setAssignModal({ show: true, data })
         },
         label: () => {
-          return 'Giao việc'
+          return 'Bác sỹ phụ trách'
         },
         backGroundColor: '',
       },
       pinned: 'right',
       hide: userInfo.role !== ROLE.DOCTOR && userInfo.role !== ROLE.ADMIN
-      
+
     },
     {
       headerName: 'QR',
       cellClass: 'al-center qr-cell',
       field: 'qr',
       valueGetter: () => {
-        return 'Xem';
+        return 'QR';
       },
       pinned: 'right',
       maxWidth: 60,
@@ -253,12 +253,12 @@ const CreateSchedule = () => {
 
   return (
     <div className="w-full h-full p-10 flex flex-col bg-[#F3F4F6]">
-      <div className="flex justify-between items-center mb-10">
-        <div className="title  font-bold">{userInfo.role === ROLE.CUSTOMER ? 'Đăng ký tiêm chủng' : 'Danh sách lịch hẹn'}</div>
+      <div className="flex justify-between items-center mb-10 ">
+        <div className="title  font-bold ">{userInfo.role === ROLE.CUSTOMER ? 'Đăng ký tiêm chủng' : 'Danh sách lịch hẹn'}</div>
         <Button onClick={handleShowAddModal}>
-          <div className="flex items-center">
+          <div className="flex items-center ">
             <IoMdAddCircleOutline width={24} height={24} className="mr-1 h-[1.4rem] w-[1.4rem]" />
-            Đặt lịch
+            ĐẶT LỊCH TIÊM CHỦNG
           </div>
         </Button>
       </div>
@@ -269,7 +269,7 @@ const CreateSchedule = () => {
         rowModelType="infinite"
       ></DataGrid>
 
-      <Modal title={addModal.data != null ? 'Cập nhật lịch' : 'Đặt lịch'} unMounted show={addModal.show} onHide={handleHideAddModal}>
+      <Modal title={addModal.data != null ? 'Cập nhật thông tin lịch tiêm' : 'Đặt Lịch Tiêm'} unMounted show={addModal.show} onHide={handleHideAddModal} >
         <ScheduleForm
           editData={addModal.data}
           onHide={handleHideAddModal}
@@ -279,21 +279,22 @@ const CreateSchedule = () => {
         />
       </Modal>
       <Modal
-        title="Mã QR và phiếu khảo sát"
+        title="Quét mã QR để xem thông tin chi tiết đặt lịch"
         size="lg"
         show={qrModal.show}
         onHide={() => {
           setQrModal({ show: false });
         }}
       >
-        <div className="w-full h-full flex flex-col items-center justify-center pb-5">
-          <QRCode value={`http://192.168.0.102:3001${ROUTES.SCHEDULE_DETAIL}/${(qrModal.data as Record<string, unknown>)?.id}`} />
-          <div className="w-full my-10">
+        <div className="w-full h-full flex flex-col items-center justify-center pb-5 ">
+          <QRCode value={`http://192.168.0.101:3001${ROUTES.SCHEDULE_DETAIL}/${(qrModal.data as Record<string, unknown>)?.id}`} />
+          <div className="w-full my-10 font-bold" style={{ fontSize: '19px' }}>
             <HealthSurveyTemplate initData={qrModal.data?.healthSurveyStatus as Record<string, string>[]} />
           </div>
-          <Button onClick={() => {
-            setQrModal({ show: false });
-          }}>Xác nhận</Button>
+          <Button className="inline-block rounded px-7 py-1.5 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_rgba(32,189,189,0.4)] transition duration-150 ease-in-out hover:shadow-[0_8px_18px_-4px_rgba(32,189,189,0.5)] hover:bg-[#0F9191]"
+            style={{ backgroundColor: '#20BDBD' }} onClick={() => {
+              setQrModal({ show: false });
+            }}>Xác nhận</Button>
         </div>
       </Modal>
       <Modal
@@ -311,11 +312,11 @@ const CreateSchedule = () => {
           initialValues={{ monitorUserId: '', monitorName: '' }}
         >
           {({ handleSubmit, touched, errors, setFieldValue }) => (
-            <form className='w-full h-full flex flex-col items-center justify-center' onSubmit={handleSubmit}>
+            <form className='w-full h-full flex flex-col items-center justify-center ' onSubmit={handleSubmit}>
               <UserPicker
                 className='w-full'
                 label="Bác sỹ"
-                placeholder='Chọn bác sỹ'
+                placeholder='Giao việc cho bác sỹ...'
                 role={[ROLE.DOCTOR]}
                 hasError={touched.monitorUserId && !isBlank(errors.monitorUserId)}
                 errorMessage={errors.monitorUserId}
@@ -324,7 +325,9 @@ const CreateSchedule = () => {
                   setFieldValue('monitorName', selected?.label)
                 }}
               />
-              <Button className='w-full mt-20' type='submit' >Xác nhận</Button>
+              <div className='h-4' />
+              <Button className="inline-block w-full rounded px-7 py-1.5 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_rgba(32,189,189,0.4)] transition duration-150 ease-in-out hover:shadow-[0_8px_18px_-4px_rgba(32,189,189,0.5)] hover:bg-[#0F9191]"
+                style={{ backgroundColor: '#20BDBD' }} type='submit' >Xác nhận</Button>
             </form>
           )}
         </Formik>

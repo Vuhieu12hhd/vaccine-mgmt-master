@@ -61,7 +61,7 @@ const Login = () => {
           <Loader active={loading} className="md:w-8/12 lg:ml-6 lg:w-5/12">
             <Formik initialValues={{ email: '', password: '' }} onSubmit={handleLogin} validationSchema={schema}>
               {({ values, handleChange, handleBlur, handleSubmit, errors, touched }) => (
-                <form className="bg-[#D1E9E5] rounded-md p-[2rem]" onSubmit={handleSubmit}>
+                <form className="bg-[#D6E3F3] rounded-md p-[2rem]" onSubmit={handleSubmit}>
                   {/* <!-- Email input --> */}
                   <div className="text-5xl font-medium leading-tight text-center mb-[5rem] mt-[5rem]">Đăng nhập</div>
                   <TextInput

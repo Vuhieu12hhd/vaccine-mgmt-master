@@ -127,7 +127,7 @@ const PasswordForm = (props: { onHide(): void }) => {
               <TextInput
                 name="password"
                 type="password"
-                label="Mật Khẩu"
+                label="Mật Khẩu hiện tại"
                 autoComplete="new-password"
                 className="mb-5"
                 role="presentation"
@@ -154,7 +154,7 @@ const PasswordForm = (props: { onHide(): void }) => {
                 name="confirmPassword"
                 type="password"
                 className="mb-5"
-                label="Mật khẩu xác nhận"
+                label="Xác nhận mật khẩu"
                 autoComplete="new-password"
                 role="presentation"
                 onChange={handleChange}
@@ -168,11 +168,12 @@ const PasswordForm = (props: { onHide(): void }) => {
             {/* <!-- Submit button --> */}
 
             <TERipple rippleColor="light" className="w-full mt-5">
-              <button
+            <button
                 type="submit"
-                className="inline-block w-full rounded bg-primary px-7 py-1.5 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#007EA6] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+                className="inline-block w-full rounded px-7 py-1.5 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_rgba(32,189,189,0.4)] transition duration-150 ease-in-out hover:shadow-[0_8px_18px_-4px_rgba(32,189,189,0.5)] hover:bg-[#0F9191]"
+                style={{ backgroundColor: '#20BDBD' }}
               >
-                Lưu mật khẩu
+                lƯU MẬT KHẨU
               </button>
             </TERipple>
           </form>

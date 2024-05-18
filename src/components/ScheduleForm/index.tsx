@@ -40,6 +40,7 @@ const ScheduleForm = (props: { onSuccess(): void; onHide(): void; editData?: Rec
         name: values.name, // tên khách hàng
         dob: values.dateOfBirth, // ngày sinh khách hàng
         gender: values.gender, //giói tính
+        address: values.address
       },
       healthSurveyAnswers: healthSurveyRef.current.map(item => ({
         healthSurveyTemplateId: item.id,
@@ -87,7 +88,7 @@ const ScheduleForm = (props: { onSuccess(): void; onHide(): void; editData?: Rec
       name: (editData.injectorInfo as Record<string, unknown>)?.name as string,
       gender: (editData.injectorInfo as Record<string, unknown>)?.gender as string,
       vaccineId: editData.vaccineId as string,
-      address: editData.address as string,
+      address: (editData.injectorInfo as Record<string, unknown>)?.gender as string,
       time: editData.date ? new Date(editData.date as string) : new Date(),
       dateOfBirth: (editData.injectorInfo as Record<string, unknown>)?.dob
         ? new Date((editData.injectorInfo as Record<string, unknown>)?.dob as string)
@@ -107,8 +108,8 @@ const ScheduleForm = (props: { onSuccess(): void; onHide(): void; editData?: Rec
         <div className="w-full m-auto max-w-screen-xl ">
           <Formik validationSchema={schema} onSubmit={onSubmit} initialValues={initialValues}>
             {({ values, isValid, handleSubmit, handleChange, handleBlur, setFieldValue, errors, touched }) => (
-              <form onSubmit={handleSubmit} className="max-w-screen-lg m-auto">
-                <h2 className="mb-3 text-gray-950 text-[1rem] font-bold">Thông tin người tiêm</h2>
+              <form onSubmit={handleSubmit} className="max-w-screen-lg m-auto" >
+                <h2 className="mb-3 text-gray-950 text-[1rem] font-bold">Vui lòng điền đầy đủ thông tin.</h2>
                 <div className="inputs grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
                   <TextInput
                     type="text"
@@ -116,7 +117,7 @@ const ScheduleForm = (props: { onSuccess(): void; onHide(): void; editData?: Rec
                     className="mb"
                     autoComplete="off"
                     aria-autocomplete="none"
-                    placeholder="Nguyen Van A"
+                    placeholder="Nguyen Van An"
                     value={values.name}
                     name="name"
                     onChange={handleChange}
@@ -156,7 +157,7 @@ const ScheduleForm = (props: { onSuccess(): void; onHide(): void; editData?: Rec
                   />
                   <TextInput
                     type="text"
-                    label="Cơ sở"
+                    label="Cơ sở tiêm"
                     className=""
                     autoComplete="off"
                     aria-autocomplete="none"
@@ -170,16 +171,24 @@ const ScheduleForm = (props: { onSuccess(): void; onHide(): void; editData?: Rec
                   ></TextInput>
                   <DatePicker showTimeInput label="Thời gian" onChange={date => setFieldValue('time', date)} selected={values.time} />
                 </div>
-                <h2 className="mb-5 text-gray-950 text-[1rem] font-bold">Khảo sát sức khỏe</h2>
-                <HealthSurveyTemplate initData={editData?.healthSurveyAnswers as Record<string, string>[]} onChange={data => (healthSurveyRef.current = data)} />
+                <h2 className="mb-5 text-gray-950 text-[1rem] font-bold">Khảo Sát Tình Trạng Sức Khỏe</h2>
+                <div style={{ fontSize: '17px' }}>
+                  <HealthSurveyTemplate
+                    initData={editData?.healthSurveyAnswers as Record<string, string>[]}
+                    onChange={(data) => (healthSurveyRef.current = data)}
+                  />
+                </div>
+
                 <div className="buttons w-full flex justify-center mt-10 ">
                   <button
                     type="submit"
                     disabled={!isValid}
-                    className="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#007EA6] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+                    className="inline-block w-full rounded px-7 py-1.5 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_rgba(32,189,189,0.4)] transition duration-150 ease-in-out hover:shadow-[0_8px_18px_-4px_rgba(32,189,189,0.5)] hover:bg-[#0F9191]"
+                    style={{ backgroundColor: '#20BDBD' }}
                   >
                     Tiếp tục
                   </button>
+
                 </div>
               </form>
             )}
@@ -187,9 +196,10 @@ const ScheduleForm = (props: { onSuccess(): void; onHide(): void; editData?: Rec
         </div>
       ) : (
         <div className="flex flex-col items-center">
-          <h2 className="mb-5">Bạn đã đặt lịch thành công</h2>
+          <h4 className="mb-5 text-center">Đặt lịch thành công. Quý khách có thể quét mã QR tại trung tâm để xem chi tiết thông tin tiêm chủng, trân trọng.</h4>
+
           <div className="mb-6">
-            <QRCode value={`http://192.168.0.102:3001/schedule-detail/${(showQr.data as Record<string, unknown>).id}`} />
+            <QRCode value={`http://192.168.0.101:3001/schedule-detail/${(showQr.data as Record<string, unknown>).id}`} />
           </div>
           <div className="buttons">
             <button
@@ -198,10 +208,12 @@ const ScheduleForm = (props: { onSuccess(): void; onHide(): void; editData?: Rec
                 props.onHide();
               }}
               type="button"
-              className="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#007EA6] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+              className="inline-block w-full rounded px-7 py-1.5 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_rgba(32,189,189,0.4)] transition duration-150 ease-in-out hover:shadow-[0_8px_18px_-4px_rgba(32,189,189,0.5)] hover:bg-[#0F9191]"
+              style={{ backgroundColor: '#20BDBD' }}
             >
-              Hoàn thành
+              HOÀN THÀNH
             </button>
+
           </div>
         </div>
       )}

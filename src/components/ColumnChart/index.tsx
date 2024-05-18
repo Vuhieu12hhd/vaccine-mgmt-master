@@ -23,7 +23,7 @@ const getChartConfig = (data?: ChartResultData): Highcharts.Options => {
       enabled: false
     },
     title: {
-      text: 'Thống kê',
+      text: 'Thống kê Doanh Thu',
       align: 'left'
     },
     subtitle: {
@@ -83,7 +83,7 @@ const getChartConfig = (data?: ChartResultData): Highcharts.Options => {
 
 
 function getSubtitle(total: number) {
-  return `<span style="font-size: 1.8rem; color: #7F91B1">Tổng giá trị</span>
+  return `<span style="font-size: 1.8rem; color: #7F91B1">Tổng doanh thu</span>
       <br>
       <span style="font-size: 1.8rem; text-align: center">
           <b> ${Highcharts.numberFormat(total, 0, ".", ',')}</b> VNĐ
@@ -94,9 +94,11 @@ const getPieChartConfig = (data?: ChartResultData): Highcharts.Options => {
   const charData: { name: string, y: number }[] = [];
 
   let total = 0;
-  if (data?.statisticIncomeByVaccine) {
-    for (let i = 0; i < (data.statisticIncomeByVaccine.length ?? 0); i++) {
-      const item = data.statisticIncomeByVaccine[i];
+  console.log("data?.statisticIncome", data?.statisticIncome);
+  
+  if (data?.statisticIncome) {
+    for (let i = 0; i < (data.statisticIncome.length ?? 0); i++) {
+      const item = data.statisticIncome[i];
       charData.push({
         name: item.key.split('|')[1] as string,
         y: item.value
@@ -129,7 +131,7 @@ const getPieChartConfig = (data?: ChartResultData): Highcharts.Options => {
       x: 0,
       labelFormatter: function () {
         const point = this as Highcharts.Point
-        return `<span style="margin-right: 1rem;">${this.name}</span><span style="margin-right: 1rem">${point.y} VNĐ</span><span  style="margin-right: 1rem;">${formatNumber((point.y ?? 0) / (point.total ?? 1), 2, 1 / 100)}% </span>`
+        return `<span style="margin-right: 1rem;">${this.index}</span><span style="margin-right: 1rem">${point.y} VNĐ</span><span  style="margin-right: 1rem;">${formatNumber((point.y ?? 0) / (point.total ?? 1), 2, 1 / 100)}% </span>`
       }
     },
     tooltip: {
@@ -142,7 +144,7 @@ const getPieChartConfig = (data?: ChartResultData): Highcharts.Options => {
     plotOptions: {
       pie: {
         borderWidth: 0,
-        innerSize: '80%',
+        innerSize: '75%',
         dataLabels: {
           enabled: false,
 
@@ -150,7 +152,7 @@ const getPieChartConfig = (data?: ChartResultData): Highcharts.Options => {
         showInLegend: true,
       }
     },
-    colors: ['#FCE700', '#F8C4B4', '#f6e1ea', '#B8E8FC', '#BCE29E'],
+    colors: ['#46ECEC', '#1CC1F5', '#FFAED0', '#B8E8FC', '#BCE29E'],
     series: [
       {
         type: 'pie',
@@ -168,15 +170,15 @@ interface ChartResultData {
 }
 const TypeConfig = [
   {
-    label: 'Ngày',
+    label: 'Thống Kê Theo Ngày',
     value: 'DAY'
   },
   {
-    label: 'Tháng',
+    label: 'Thống Kê Theo Tháng',
     value: 'MONTH'
   },
   {
-    label: 'Năm',
+    label: 'Thống Kê Theo Năm',
     value: 'YEAR'
   },
 ]
@@ -184,6 +186,7 @@ const ColumnChart = () => {
   const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
   const pieChartComponentRef = useRef<HighchartsReact.RefObject>(null);
   const [activeType, setActiveType] = useState('DAY')
+  const [isShow, setIsShow] = useState(true)
   useEffect(() => {
     queryData(activeType)
   }, [activeType]);
@@ -192,11 +195,15 @@ const ColumnChart = () => {
     getChartData({
       statisticType: type
     }).then(data => {
+      console.log("data", data);
+      
       if (data.status) {
         const option = getChartConfig(data.result as ChartResultData)
         const pieOptions = getPieChartConfig(data.result as ChartResultData)
         chartComponentRef.current?.chart.update(option);
         pieChartComponentRef.current?.chart.update(pieOptions);
+      } else {
+        setIsShow(false)
       }
     })
   }
@@ -206,7 +213,8 @@ const ColumnChart = () => {
 
 
   return (
-    <div className='max-w-screen-lg m-auto mb-10 flex flex-col'>
+    <>
+    {isShow && <div className='max-w-screen-lg m-auto mb-10 flex flex-col'>
       <div className='flex mb-10 gap-4'>
         {
           TypeConfig.map(item =>
@@ -236,7 +244,9 @@ const ColumnChart = () => {
         options={pieOptions}
         ref={pieChartComponentRef}
       />
-    </div>
+    </div>}
+    </>
+    
   )
 }
 

@@ -111,7 +111,7 @@ const ProviderManagement = () => {
         rowModelType="infinite"
       ></DataGrid>
 
-      <Modal title="Thêm nhà cung cấp" show={addModal.show} onHide={handleHideAddModal}>
+      <Modal title="Quản lý thông tin nhà cung cấp" show={addModal.show} onHide={handleHideAddModal}>
         {addModal.show && (
           <ProviderForm
             editData={addModal.data}

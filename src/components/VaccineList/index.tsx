@@ -39,11 +39,6 @@ const VaccineManagement = () => {
       minWidth: 120,
     },
     {
-      headerName: 'Số liều, sử dụng',
-      maxWidth: 90,
-      valueFormatter: integerFormatter
-    },
-    {
       headerName: 'Đơn giá',
       field: 'price',
       cellClass: 'al-right',
@@ -60,7 +55,7 @@ const VaccineManagement = () => {
       valueFormatter: integerFormatter
     },
     {
-      headerName: 'Số lượng đã tiêm',
+      headerName: 'Vaccine đã tiêm',
       field: 'injectedQuantity',
       colId: 'injectedQuantity',
       cellClass: 'al-right',
@@ -68,7 +63,7 @@ const VaccineManagement = () => {
       valueFormatter: integerFormatter
     },
     {
-      headerName: 'Số lượng hết hạn',
+      headerName: 'Vaccine hết hạn',
       field: 'expiredQuantity',
       colId: 'expiredQuantity',
       cellClass: 'al-right',
@@ -76,7 +71,7 @@ const VaccineManagement = () => {
       valueFormatter: integerFormatter
     },
     {
-      headerName: 'Số lượng bị lỗi ',
+      headerName: 'Vaccine bị lỗi ',
       field: 'errorQuantity',
       colId: 'errorQuantity',
       cellClass: 'al-right',
@@ -87,7 +82,7 @@ const VaccineManagement = () => {
       headerName: 'Tiêu chuẩn',
       field: 'standard',
       colId: 'standard',
-      minWidth: 90,
+      minWidth: 120,
     },
     {
       headerName: 'Số lô',
@@ -194,10 +189,24 @@ const VaccineManagement = () => {
         <Formik
           onSubmit={handleSearch}
           initialValues={{ searchKey: '' }}>
-          {({ handleChange, handleSubmit }) => (<form className='grid grid-cols-6 gap-4' onSubmit={handleSubmit}>
-            <TextInput placeholder='Nhập ký tự tìm kiếm ...' name="searchKey" onChange={handleChange} />
-            <Button type='submit' className='max-h-[3.6rem] w-fit mt-auto ml-auto'>Tìm kiếm</Button>
-          </form>)}
+          {({ handleChange, handleSubmit }) => (<form
+            className='grid grid-cols-10 gap-4' // Grid với 6 cột
+            onSubmit={handleSubmit}
+          >
+            <TextInput
+              placeholder='Nhập thông tin ...'
+              name="searchKey"
+              onChange={handleChange}
+              className='col-span-2' // TextInput chiếm 5 cột
+            />
+            <Button
+              type='submit'
+              className='col-span-1' // Button nhỏ hơn, chiếm 1 cột
+            >
+              Tìm kiếm
+            </Button>
+          </form>
+          )}
         </Formik>
       </div>
       <DataGrid

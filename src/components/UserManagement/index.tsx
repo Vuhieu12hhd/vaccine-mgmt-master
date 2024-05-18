@@ -23,7 +23,7 @@ const UserManagement = (props: { title: string; type: 'CUSTOMER' | 'EMPLOYEE' })
     setLoading(true);
     const res = await updateUser({ id: data?.id, active: !data?.active });
     if (res.status) {
-      showSuccess('Cạp nhật thành công');
+      showSuccess('Cập nhật thành công');
       refreshData();
     } else {
       showError((res.error as Record<string, unknown>)?.message as string);
@@ -95,10 +95,24 @@ const UserManagement = (props: { title: string; type: 'CUSTOMER' | 'EMPLOYEE' })
         <Formik
           onSubmit={handleSearch}
           initialValues={{ searchKey: '' }}>
-          {({ handleChange, handleSubmit }) => (<form className='grid grid-cols-6 gap-4' onSubmit={handleSubmit}>
-            <TextInput placeholder='Nhập ký tự tìm kiếm...' name="searchKey" onChange={handleChange} />
-            <Button type='submit' className='max-h-[3.6rem] w-fit mt-auto ml-auto'>Tìm kiếm</Button>
-          </form>)}
+          {({ handleChange, handleSubmit }) => (<form
+            className='grid grid-cols-10 gap-4' // Grid với 6 cột
+            onSubmit={handleSubmit}
+          >
+            <TextInput
+              placeholder='Nhập thông tin ...'
+              name="searchKey"
+              onChange={handleChange}
+              className='col-span-2' // TextInput chiếm 5 cột
+            />
+            <Button
+              type='submit'
+              className='col-span-1' // Button nhỏ hơn, chiếm 1 cột
+            >
+              Tìm kiếm
+            </Button>
+          </form>
+          )}
         </Formik>
       </div>
       <DataGrid

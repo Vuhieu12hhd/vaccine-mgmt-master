@@ -2,8 +2,8 @@ import * as yup from 'yup';
 export const getCreateScheduleSchema = () => {
   return yup.object().shape({
     name: yup.string().label('Tên').required(),
-    vaccineId: yup.string().label('Tên').required(),
-    time: yup.string().label('Tên').required(),
+    vaccineId: yup.string().label('vaccineId').required(),
+    time: yup.string().label('Thời gian').required(),
   })
 }
 

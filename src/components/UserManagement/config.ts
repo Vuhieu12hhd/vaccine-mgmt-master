@@ -14,17 +14,16 @@ export const getColumnDefs = (type: 'CUSTOMER' | 'EMPLOYEE', buttonClick: (data:
   },
   {
     headerName: type === 'CUSTOMER' ? 'Tên khách hàng' : 'Tên nhân viên',
-    minWidth: 90,
+    minWidth: 200,
     field: 'name',
     colId: 'name',
   },
   {
-    headerName: 'Ngày sinh',
-    field: 'dob',
-    valueFormatter: dateFormatterFromTimestamp,
+    headerName: 'Địa chỉ',
+    field: 'address',
+    minWidth: 90,
     cellClass: 'al-center',
-    minWidth: 110,
-    colId: 'dob',
+    colId: 'address',
   },
   {
     headerName: 'Giới tính',
@@ -49,14 +48,15 @@ export const getColumnDefs = (type: 'CUSTOMER' | 'EMPLOYEE', buttonClick: (data:
   {
     headerName: 'Email',
     field: 'email',
-    minWidth: 120,
+    minWidth: 220,
     colId: 'email',
   },
   {
     headerName: 'Số điện thoại',
     field: 'phoneNumber',
-    minWidth: 120,
+    minWidth: 80,
     colId: 'phoneNumber',
+    cellClass: 'al-center',
   },
   {
     headerName: 'Tùy chọn',
@@ -66,7 +66,7 @@ export const getColumnDefs = (type: 'CUSTOMER' | 'EMPLOYEE', buttonClick: (data:
     cellRendererParams: {
       onClick: buttonClick,
       label: (data: Record<string, unknown>) => {
-        return data?.active ? 'De-active' : 'Active'
+        return data?.active ? 'Lock account' : 'Unlock account'
       },
     }
   },

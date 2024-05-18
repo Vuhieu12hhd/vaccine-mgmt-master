@@ -53,7 +53,7 @@ const ScheduleDetail = () => {
 
   return (
     <div className='w-full max-w-screen-lg my-8 m-auto p-4 shadow-md rounded-md'>
-      <div className='text-[1.4rem]  font-bold w-full text-center mb-[4.8rem]'>Thông tin lịch tiêm</div>
+      <div className='text-[1.4rem]  font-bold mx-auto text-center mb-[4rem] 'style={{ backgroundColor: '#20BDBD',width: '400px' }}>THÔNG TIN LỊCH TIÊM</div>
       <div>
         <div className='mb-3 text-gray-950 text-[1.2rem] font-bold'>Thông tin người tiêm</div>
         <div className='p-8 text-[1rem] grid grid-cols-2 gap-y-5'>
@@ -75,7 +75,7 @@ const ScheduleDetail = () => {
         <div className='mb-3 text-gray-950 text-[1.2rem] font-bold'>Thông tin dịch vụ</div>
         <div className='p-8 text-[1rem] grid grid-cols-2 gap-y-5'>
           <div className="flex">
-            <div className='font-bold mr-3'>Vaccine:</div>
+            <div className='font-bold mr-3'>Loại vaccine:</div>
             <div className='uppercase'>{schedule.vaccine?.name}</div>
           </div>
           <div className="flex">
@@ -88,7 +88,7 @@ const ScheduleDetail = () => {
         <div className='mb-3 text-gray-950 text-[1.2rem] font-bold'>Khảo sát sức khỏe</div>
         <HealthSurveyTemplate initData={schedule?.healthSurveyAnswers as Record<string, string>[] ?? []} />
         <div className="flex items-center">
-          <div className=' mr-8 text-gray-950 text-[1rem] font-bold'>Kết quả</div>
+          <div className=' mr-8 text-gray-950 text-[1rem] font-bold'>Kết quả khảo sát</div>
           <div className='w-[10rem]'><SelectCell options={[
             {
               label: 'Thành công',
@@ -117,14 +117,14 @@ const ScheduleDetail = () => {
         </div>
 
       </div>
-      <div className='w-full flex justify-center mt-[3.2rem]'>
+      <div className='w-full flex justify-center mt-[3rem]'>
         {!success && <Button onClick={() => {
           setAssignModal({ show: true, data: schedule })
-        }}>Giao việc</Button>}
+        }}>Bác sỹ phụ trách</Button>}
       </div>
 
       <Modal
-        title="Giao việc"
+        title="Bác sỹ phụ trách"
         size="sm"
         show={assignModal.show}
         bodyClassName='!overflow-y-visible'
@@ -141,7 +141,7 @@ const ScheduleDetail = () => {
               <UserPicker
                 className='w-full'
                 label="Bác sỹ"
-                placeholder='Chọn bác sỹ'
+                placeholder='Giao việc cho bác sỹ'
                 role={[ROLE.DOCTOR]}
                 hasError={touched.monitorUserId && !isBlank(errors.monitorUserId)}
                 errorMessage={errors.monitorUserId}
@@ -150,7 +150,8 @@ const ScheduleDetail = () => {
                   setFieldValue('monitorName', selected?.label)
                 }}
               />
-              <Button className='w-full mt-20' type='submit' >Xác nhận</Button>
+              <Button className="inline-block w-full rounded px-7 py-1.5 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_rgba(32,189,189,0.4)] transition duration-150 ease-in-out hover:shadow-[0_8px_18px_-4px_rgba(32,189,189,0.5)] hover:bg-[#0F9191]"
+                style={{ backgroundColor: '#20BDBD' }} type='submit' >Xác nhận</Button>
             </form>
           )}
         </Formik>

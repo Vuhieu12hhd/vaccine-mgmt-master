@@ -37,6 +37,14 @@ const ScheduleHistory = () => {
       colId: 'name',
     },
     {
+      headerName: 'Bác sỹ phụ trách ',
+      minWidth: 180,
+      field: 'user.name',
+      colId: 'monitorName'
+     
+    },
+
+    {
       headerName: 'Ngày sinh',
       field: 'injectorInfo.dob',
       valueFormatter: dateFormatterFromTimestamp,
@@ -57,8 +65,8 @@ const ScheduleHistory = () => {
     },
     {
       headerName: 'Cơ sở tiêm',
-      field: 'address',
-      minWidth: 120,
+      field: 'injectorInfo.address',
+      minWidth: 130,
       colId: 'address',
     },
     {
@@ -67,12 +75,12 @@ const ScheduleHistory = () => {
       valueFormatter: dateTimeFormatterFromTimestamp,
       colId: 'date',
       cellClass: 'al-center',
-      minWidth: 250,
+      minWidth: 200,
     },
     {
       headerName: 'Loại vaccine',
       field: 'vaccine.name',
-      cellClass: 'al-center',
+      
       colId: 'vaccineId',
     },
     {
@@ -88,11 +96,11 @@ const ScheduleHistory = () => {
       minWidth: 200,
       valueFormatter: params => {
         const MapHealthSurveyStatus: Record<string, string> = {
-          SCREEN_TEST_WAITING: 'Chờ khám sàng lọc',
-          SCREEN_TESTING: 'Đang khám sàng lọc',
-          SCREEN_TEST_PASSED: 'Đã qua khám sàng lọc',
-          SCREEN_TEST_REJECTED: 'Không qua khám sàng lọc',
-          INJECT_WAITING: 'Đợi tiêm',
+          SCREEN_TEST_WAITING: 'Chờ khám sức khỏe',
+          SCREEN_TESTING: 'Đang khám sức khỏe',
+          SCREEN_TEST_PASSED: 'Sức khỏe đạt',
+          SCREEN_TEST_REJECTED: 'Sức khỏe không đạt',
+          INJECT_WAITING: 'Chờ tiêm',
           INJECTING: 'Đang tiêm',
           INJECTED: 'Đã tiêm',
         };
@@ -228,10 +236,24 @@ const ScheduleHistory = () => {
         <Formik
           onSubmit={handleSearch}
           initialValues={{ searchKey: '' }}>
-          {({ handleChange, handleSubmit }) => (<form className='grid grid-cols-6 gap-4' onSubmit={handleSubmit}>
-            <TextInput placeholder='Nhập ký tự tìm kiếm ...' name="searchKey" onChange={handleChange} />
-            <Button type='submit' className='max-h-[3.6rem] w-fit mt-auto ml-auto'>Tìm kiếm</Button>
-          </form>)}
+          {({ handleChange, handleSubmit }) => (<form
+            className='grid grid-cols-10 gap-4' // Grid với 6 cột
+            onSubmit={handleSubmit}
+          >
+            <TextInput
+              placeholder='Nhập thông tin ...'
+              name="searchKey"
+              onChange={handleChange}
+              className='col-span-2' // TextInput chiếm 5 cột
+            />
+            <Button
+              type='submit'
+              className='col-span-1' // Button nhỏ hơn, chiếm 1 cột
+            >
+              Tìm kiếm
+            </Button>
+          </form>
+          )}
         </Formik>
       </div>
       <DataGrid
